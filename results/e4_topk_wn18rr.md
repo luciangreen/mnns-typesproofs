@@ -1,0 +1,12 @@
+| Method | Probes saved | Answers lost |
+| --- | --- | --- |
+| top 90% (36643 entities) | 8756 (0.9%) | 750 (0.2%) |
+| top 75% (30536 entities) | 46871 (4.6%) | 4654 (1.5%) |
+| top 50% (20357 entities) | 158092 (15.5%) | 18702 (6.2%) |
+| top 25% (10179 entities) | 336941 (32.9%) | 51875 (17.2%) |
+| top 10% (4071 entities) | 545248 (53.3%) | 107631 (35.7%) |
+| top 1% (407 entities) | 834108 (81.5%) | 226279 (75.1%) |
+| learned types, entity filter no | 110788 (10.8%) | 0 (0.0%) |
+| learned types, entity filter yes | 358539 (35.0%) | 0 (0.0%) |
+| snapshot types, entity filter no | 117562 (11.5%) | 0 (0.0%) |
+| exact types, entity filter no | 117562 (11.5%) | 0 (0.0%) |

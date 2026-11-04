@@ -1,0 +1,8 @@
+| Type source | Paths run | Answers found | Deciding (s, once) | Running (s, median of 5) | Running speed-up | Answers kept |
+| --- | --- | --- | --- | --- | --- | --- |
+| none | 121 | 301382 | 0.000 | 0.825 | 1.00x | 301382 (100.0%) |
+| learned | 90 | 301382 | 0.000 | 0.767 | 1.07x | 301382 (100.0%) |
+| snapshot | 85 | 301382 | 0.000 | 0.889 | 0.93x | 301382 (100.0%) |
+| exact | 85 | 301382 | 0.722 | 0.784 | 1.05x | 301382 (100.0%) |
+| none, facts read by kind | 121 | 301382 | 0.000 | 0.966 | 1.00x | 301382 (100.0%) |
+| learned + entity filter (read by kind) | 90 | 301382 | 0.001 | 0.597 | 1.62x | 301382 (100.0%) |

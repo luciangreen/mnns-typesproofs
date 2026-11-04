@@ -1,0 +1,4 @@
+| Graph | Type source | Paths | Pruned | Pruned but not empty | Truly empty | Answers | Answers lost |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| train | learned | 1331 | 587 (44.1%) | 0 (0.0%) | 866 | 858265 | 0 (0.0%) |
+| all | learned | 1331 | 587 (44.1%) | 0 (0.0%) | 854 | 1053647 | 0 (0.0%) |

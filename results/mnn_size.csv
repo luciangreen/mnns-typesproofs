@@ -1,0 +1,5 @@
+"Version","Rules","Neurons","Edges","Network answers","Same answers as untyped"
+"untyped","25","11525","25735","same as its program","yes (14 answers)"
+"slot_types","25","4730","9826","same as its program","yes (14 answers)"
+"pruned_rules","21","9761","21619","same as its program","yes (14 answers)"
+"both","21","4730","9826","same as its program","yes (14 answers)"
