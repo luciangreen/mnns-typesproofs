@@ -1,0 +1,5 @@
+| Type source | Entity filter | Paths | Pruned | Pruned but not empty | Truly empty | Empty but kept | Probes saved | Answers (derivations) | Answers lost |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| none | no | 1369 | 0 (0.0%) | 0 (0.0%) | 983 | 983 | 0 (0.0%) | 6699949 | 0 (0.0%) |
+| snapshot | no | 1369 | 983 (71.8%) | 0 (0.0%) | 983 | 0 | 28084608 (69.7%) | 6699949 | 0 (0.0%) |
+| exact | no | 1369 | 983 (71.8%) | 0 (0.0%) | 983 | 0 | 28084608 (69.7%) | 6699949 | 0 (0.0%) |

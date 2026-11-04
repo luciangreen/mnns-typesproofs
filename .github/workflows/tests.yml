@@ -1,0 +1,18 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SWI-Prolog
+        run: |
+          sudo apt-add-repository -y ppa:swi-prolog/stable
+          sudo apt-get update
+          sudo apt-get install -y swi-prolog-nox
+      - name: Unit tests
+        run: ./run.sh test
+      - name: Guard examples (needs s2a2)
+        run: |
+          git clone --depth 1 https://github.com/luciangreen/s2a2 deps/s2a2
+          swipl -g guards_table -t halt prolog/tuple_guards.pl

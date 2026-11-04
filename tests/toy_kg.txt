@@ -1,0 +1,10 @@
+dog.n.01	_hypernym	canine.n.01
+canine.n.01	_hypernym	animal.n.01
+cat.n.01	_hypernym	feline.n.01
+run.v.01	_hypernym	move.v.01
+run.v.01	_derivationally_related_form	runner.n.01
+runner.n.01	_derivationally_related_form	run.v.01
+move.v.01	_verb_group	go.v.01
+quick.a.01	_similar_to	fast.s.01
+fast.s.01	_similar_to	quick.a.01
+fast.s.01	_derivationally_related_form	speed.n.01
