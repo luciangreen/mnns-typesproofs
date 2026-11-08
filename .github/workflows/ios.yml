@@ -1,0 +1,30 @@
+name: Inputs and outputs
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SWI-Prolog
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes swi-prolog-nox
+      - name: Run the 200 inputs again
+        run: |
+          swipl --version
+          swipl io/make_ios.pl
+          if git diff --quiet --exit-code -- io/ && [ -z "$(git status --porcelain -- io/)" ]; then
+            echo "All 200 inputs give the outputs in io/ios.txt."
+          else
+            git diff --stat -- io/ || true
+            git diff -- io/ios.txt | head -60 || true
+            # the new files, packed into one line, to commit if the change is meant
+            echo "IOS-FILES-BEGIN $(tar czf - io/ios.txt io/ios.pl | base64 -w0) IOS-FILES-END"
+            echo "::error::Outputs differ from io/ios.txt. If the change is meant, run swipl io/make_ios.pl and commit io/."
+            exit 1
+          fi
