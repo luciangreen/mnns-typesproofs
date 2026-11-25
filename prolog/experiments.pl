@@ -118,7 +118,8 @@ pct(A, B, S) :- ( B =:= 0 -> P = 0 ; P is 100 * A / B ), format(atom(S), "~d (~1
 % ---------------------------------------------------------------- E3 timing
 % Two steps are timed separately. Deciding which paths to keep is done once, before any
 % query (like compiling); running is the probing of every kept path. Running is timed five
-% times and the median reported; the speed-up compares running times with "none".
+% times and the median reported; the running speed-up compares running times with "none",
+% and the speed-up with deciding adds each source's deciding time to its running time.
 e3_timing(G) :-
     graph_name(G, Name), note("E3 ~w", [Name]),
     prepare_train(G), prepare_all(G), sources(G, Srcs),
@@ -128,18 +129,20 @@ e3_timing(G) :-
         decide_kinds(KK, DecK), length(KK, NPK), median_of(5, run_kinds(KK), RunK, DK),
         append(Res0, ['none, facts read by kind'-r(0, RunA, NPA, DA), 'learned + entity filter (read by kind)'-r(DecK, RunK, NPK, DK)], Res)
     ;   Res = Res0 ),
-    memberchk(none-r(_, T0, _, D0), Res),
-    findall([S, NP, Ds, DecS, RunS, Speed, Kept],
+    memberchk(none-r(Dec0, T0, _, D0), Res),
+    findall([S, NP, Ds, DecS, RunS, Speed, Overall, Kept],
             ( member(S-r(Dec, T, NP, D), Res),
               format(atom(DecS), "~3f", [Dec]), format(atom(RunS), "~3f", [T]),
               % the filtered run is compared with the unpruned run on the same (by-kind) index
-              ( sub_atom(S, _, _, _, 'by kind') -> memberchk('none, facts read by kind'-r(_, TB, _, _), Res) ; TB = T0 ),
+              ( sub_atom(S, _, _, _, 'by kind') -> memberchk('none, facts read by kind'-r(DecB, TB, _, _), Res) ; TB = T0, DecB = Dec0 ),
               ( T > 0 -> X is TB / T, format(atom(Speed), "~2fx", [X]) ; Speed = '-' ),
+              % with deciding counted too, for a single run of all the queries
+              ( Dec + T > 0 -> Y is (DecB + TB) / (Dec + T), format(atom(Overall), "~2fx", [Y]) ; Overall = '-' ),
               format(atom(Ds), "~d", [D]), pct(D, D0, Kept) ),
             Rows),
     atom_concat(e3_timing_, G, File),
     write_table(File, ['Type source', 'Paths run', 'Answers found', 'Deciding (s, once)', 'Running (s, median of 5)',
-                       'Running speed-up', 'Answers kept'], Rows).
+                       'Running speed-up', 'Speed-up with deciding', 'Answers kept'], Rows).
 time_source(S, Dec, Run, NP, D) :-
     decide_paths(S, Kept, Dec), length(Kept, NP),
     median_of(5, run_paths(Kept), Run, D).
