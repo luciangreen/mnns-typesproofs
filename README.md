@@ -43,7 +43,10 @@ On WN18RR, keeping only the top 25% of middle entities by training degree (a sta
 top-K score pruning) saves 32.9% of lookups but loses 17.2% of the answers; learned types
 with the entity filter save 35.0% and lose none. Running only the kept paths is 5.2x faster
 on FB15k-237 with the exact reference, 2.9x with the declared schema, and 1.6x on WN18RR
-with learned types and the entity filter (one CPU, median of five runs). In a manual neuronet built by pl2ann from a WN18RR slice, slot types
+with learned types and the entity filter (one CPU, median of five runs). Counting the time
+taken to decide which paths to keep, which is done once, these become 1.8x, 2.3x and 1.6x:
+the exact reference spends 10.0 seconds deciding, so it pays off only when the queries are
+run several times. In a manual neuronet built by pl2ann from a WN18RR slice, slot types
 cut neurons by 59% and edges by 62% with the same answers (deleting the rules RTP prunes adds
 nothing on top of slot types there, because pl2ann already intersects the slot domains). `prolog/tuple_guards.pl` deletes
 guards on two or more arguments that s2a2's unary prover cannot.
